@@ -1,15 +1,4 @@
-# discord-qq-bridge
-
-## 前置说明
-### 关于QQ机器人
-QQ机器人使用了el-bot的js库
-- [mirai-console-loader](https://github.com/iTXTech/mirai-console-loader) 帮助你搭建mirai所需要的环境
-- [el-bot](https://docs.bot.elpsy.cn)：是一个接入mirai平台的一个机器人nodejs库，用来方便我们使用nodejs制作qq机器人
-
-### 关于Discord机器人
-Discord制作机器人不需要类似go-cqhttp的中转程序。官方已经提供了相关api和开发者平台，让开发人员方便的制作机器人
-
-使用[discord.js](https://www.npmjs.com/package/discord.js) 库就可以方便的使用
+# 愿景 Discord <-> QQ 互通桥
 
 ## 本库安装使用方式
 ### 一、启动MCL (mirai一键安装环境工具)
@@ -27,46 +16,22 @@ Discord制作机器人不需要类似go-cqhttp的中转程序。官方已经提�
    
 > 注： 推荐使用docker的方式，不只是本地，部署到云环境也方便
 
-### 二、配置
-将config.sample.json 复制拷贝成 config.json, 并配置下面几项
-```shell script
-qqBot: 0, // 用来当bot的qq号码
-discordBot: '', // discord申请的bot id
-discordBotToken: '', // discord申请的bot id对应的token
-    bridges: [
-        {
-            bridge: {
-                id: '', // 频道webhook id
-                token: '', // 频道webhook token
-                channelID: '', // 频道id
-            },
-            qqGroup: 0 // q群
-        }
-    ]
-```
-| key | 类型 | 说明 |
-| --- | --- | --- |
-| qqBot | number | qqBot的qq号 |
-| discordBot | string | discordBot的ID |
-| discordBotToken | string | discordBot的token |
-| bridges | list | 联通桥 |
-| bridges.discord.id | string | 频道webhook id |
-| bridges.discord.token | string | 频道webhook token |
-| bridges.discord.channelID | string | 频道id |
-| bridges.qqGroup | number | q群号 |
+### 二、运行
 
-### 三、运行
+初始化及测试
 ```shell script
 npm install
 npm run start:dev
 ```
 
-### 三、生产发布
-推荐使用pm2管理
-```shell script
-npm install
-npm run build
+### 生产发布
 
+```shell script
+npm run build
+```
+
+> pm2管理（推荐）
+```shell script
 ## 启动
 pm2 start dist/main.js --name bridge
 ## 停止
@@ -77,23 +42,13 @@ pm2 restart bridge
 pm2 ls
 ```
 
-## 支持功能
-### QQ -> Discord
-- [x] 回复消息同步至Discord
-- [x] 支持表情、图片和gif消息同步至Discord
-- [x] 支持回复消息同步至Discord
-
-### Discord -> QQ
-- [x] 回复消息同步至Discord
-- [x] 支持图片和gif消息同步至Discord
-- [x] 支持回复消息同步至Discord
-
-## 文档相关
-官方api文档
-- https://discordjs.guide/#before-you-begin
-- https://discord.com/developers/applications/781193252094476360/bot
-- https://link.zhihu.com/?target=https%3A//amazonaws-china.com/cn/
+> node 直接运行
+```shell script
+node dist/main.js
+```
 
 
-# ElBot
-/autoLogin add <qqNumber> <password> 
+### 声明
+> 本项目基于 @rabbitkiller-dev 的互通桥改编
+
+> 原项目链接：https://github.com/rabbitkiller-dev/discord-qq-bridge
