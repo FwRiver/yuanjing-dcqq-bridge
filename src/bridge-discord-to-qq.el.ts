@@ -52,12 +52,10 @@ export async function toQQ(msg: Message) {
       }
     }
 
+    // 获取用户群内昵称
+    let authorNickname = msg.guild.member(msg.author).nickname;
     // 添加用户名称在信息前面
-    const avatar = await handlerUserAvatar(msg)
-    if (avatar) {
-      msgChain.push(avatar);
-    }
-    msgChain.push(MiraiMessage.Plain(`@${msg.author.username}#${msg.author.discriminator}\n`));
+    msgChain.push(MiraiMessage.Plain(`@${authorNickname}\n`)); //#${msg.author.discriminator}
 
     // 没有内容时不处理
     if (msg.content.trim()) {
